@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CrudWithImage1.ViewModel.USersRoleVM>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All User</h2>
+@*@Html.ActionLink("Create","Create", "UserProfile")*@
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Email</td>
+            <td>
+                Full Name
+            </td>
+            <td>DOB</td>
+            <td>Picture</td>
+            <td>
+                Roles
+            </td>
+            <td>...</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+
+                    @item.Email
+                </td>
+                <td>
+
+                    @item.FullName
+                </td>
+                <td>
+                    @if (item.DOB != null)
+                    {
+                        @item.DOB
+                    }
+
+                </td>
+                <td>
+                    @if(item.PicturePath != null)
+                    { 
+                    <img src="@Url.Content(item.PicturePath)" alt="@item.FullName" height="150" width="150" class=" img-circle " />
+                    }
+                </td>
+                <td>
+                    @if (item.Role != "")
+                    {
+                        @item.Role
+                    }
+                    else
+                    {
+                        @Html.Raw(" Yet does not assign in any role")
+                    }
+
+                     
+
+                </td>
+                <td>
+                    @if(User.IsInRole("Super Admin"))
+                    { 
+                    @Html.ActionLink("Edit", "Edit", "UserProfile", new { @uId = item.UserId }, null) @Html.Raw("&nbsp; &nbsp;||&nbsp;&nbsp");
+                    @Html.ActionLink("Assign Role", "AssignRole", "UserProfile", new { @uId = item.UserId }, null)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

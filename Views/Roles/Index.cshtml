@@ -1,0 +1,43 @@
+﻿@*@model IEnumerable< Microsoft.AspNet.Identity.EntityFramework.IdentityRole>*@
+@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">All User Groups</h2>
+@Html.ActionLink(" ","Create","Roles",null,new { @class = "glyphicon glyphicon-plus text-right" })
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>ID</td>
+                
+                <td>Name</td>
+                @*<td>Picture</td>
+                <td>....</td>*@
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+                {
+            <tr>
+                <td>
+                    @item.Id;
+                </td>
+               
+                <td>
+                    @item.Name;
+                </td>
+                @*<td>
+                    @item.PicturePath;
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Roles",new { @id = item.Id },null)
+                    @Html.ActionLink("Delete", "Delete", "Roles",new { @id = item.Id },null)
+                    
+
+                </td>
+            </tr>
+                }
+        </tbody>
+    </table>

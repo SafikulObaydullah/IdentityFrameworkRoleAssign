@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "AssignRole";
+}
+
+<h2>Assign User to Role </h2>
+@using (Html.BeginForm())
+{
+    <div class="col-md-12">
+        @foreach (var item in ViewBag.rName)
+        {
+
+            <input type="checkbox" name="selectedRole" value="@item.Value" checked="@item.Selected" />
+            @item.Text
+            <br />
+        }
+        <input type="hidden" value="@ViewBag.Uid" name="Uid" />
+    </div>
+    <div>
+
+        @*@Html.ActionLink("Assign", "AssignRole", "UserProfiles", null, new { @class="btn btn-primary"})*@
+        <input type="submit" value="Assign" class="btn btn-primary" />
+        @Html.ActionLink("Back to list", "Index", "UserProfile", null, new { @class = "btn btn-primary" })
+    </div>}

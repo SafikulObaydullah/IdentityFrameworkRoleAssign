@@ -1,0 +1,57 @@
+﻿@model CrudWithImage1.ViewModel.UserProfile
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Edit @User.Identity.Name</h2>
+@using (Html.BeginForm(Html.BeginForm("Edit", "UserProfile", FormMethod.Post, new { enctype = "multipart/form-data" })))
+
+{
+    @Html.ValidationSummary(true)
+    <div class="from-group">
+        <label>Full Name</label>
+        @Html.EditorFor(m => m.FullName, new { @class = "form-control" })
+    </div>
+    <div class="from-group">
+        <label>Date of Birth</label>
+        @Html.EditorFor(m => m.DOB, new { @class = "form-control" })
+    </div>
+    <div class="from-group">
+        <label>Picture</label>
+        @Html.HiddenFor(m => m.PicturePath)
+        <div id="inputPic">
+            <input type="file" name="Pic" />
+        </div>
+        @if (Model.PicturePath != null)
+        {<div id="inputedPic">
+
+                <img src="@Url.Content(Model.PicturePath)" alt="@Model.FullName" height="150" width="150" class=" img-circle " />
+                <input type="button" value="Change" id="btnChange" />
+
+
+            </div>}
+        @*//else
+        //{*@
+        @*<div id="inputPic">
+            <input type="file" name="Pic" />
+        </div>*@
+        @*}*@
+    </div>
+    <div class="from-group">
+        <input type="submit" value="Update" />
+    </div>
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#inputPic").show()
+            $("#inputedPic").show();
+            $("#btnChange").click(function () {
+                $("#inputPic").show();
+                $("#inputedPic").hide();
+            })
+
+        })
+    </script>
+}
+
